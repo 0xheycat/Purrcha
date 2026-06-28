@@ -1,0 +1,466 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────────────
+ * PURRCHA — Ritual Chain dark terminal aesthetic.
+ * Color tokens are skill-defined (ritual-dapp-design/SKILL.md):
+ *   green = trust/verified, pink = AI output, gold = caution/pending,
+ *   lime = data/user input, red = error, black/gray = base.
+ * NO indigo / blue anywhere. WCAG AA on every elevated surface.
+ * ───────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* Base backgrounds */
+  --color-bg: #000000;
+  --color-elevated: #111827;
+  --color-surface: #1F2937;
+  --color-card: #111827;
+
+  /* Ritual accents */
+  --color-ritual-green: #19D184;
+  --color-ritual-lime: #BFFF00;
+  --color-ritual-pink: #FF1DCE;
+  --color-ritual-gold: #FACC15;
+  --color-ritual-red: #EF4444;
+
+  /* Grays */
+  --color-gray-950: #030712;
+  --color-gray-900: #111827;
+  --color-gray-800: #1F2937;
+  --color-gray-700: #374151;
+  --color-gray-600: #4B5563;
+  --color-gray-500: #6B7280;
+  --color-gray-400: #9CA3AF;
+  --color-gray-300: #D1D5DB;
+  --color-gray-200: #E5E7EB;
+  --color-gray-100: #F3F4F6;
+
+  /* Borders */
+  --color-border: #374151;
+  --color-border-strong: #4B5563;
+
+  /* Foreground aliases for shadcn primitives */
+  --color-background: #000000;
+  --color-foreground: #9CA3AF;
+  --color-primary: #19D184;
+  --color-primary-foreground: #000000;
+  --color-secondary: #1F2937;
+  --color-secondary-foreground: #D1D5DB;
+  --color-muted: #1F2937;
+  --color-muted-foreground: #9CA3AF;
+  --color-accent: #1F2937;
+  --color-accent-foreground: #D1D5DB;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #000000;
+  --color-popover: #111827;
+  --color-popover-foreground: #D1D5DB;
+  --color-ring: #19D184;
+  --color-input: #374151;
+
+  /* Fonts */
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-body), sans-serif;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  /* Sidebar alias (avoid breaking shadcn sidebar primitives) */
+  --color-sidebar: #111827;
+  --color-sidebar-foreground: #D1D5DB;
+  --color-sidebar-border: #374151;
+  --color-sidebar-accent: #1F2937;
+  --color-sidebar-accent-foreground: #D1D5DB;
+  --color-sidebar-primary: #19D184;
+  --color-sidebar-primary-foreground: #000000;
+  --color-sidebar-ring: #19D184;
+}
+
+:root {
+  --radius: 10px;
+}
+
+/* The flagship aesthetic is dark-only — no light theme overrides needed. */
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background: #000;
+    color: #9CA3AF;
+    font-family: var(--font-body);
+    min-height: 100%;
+  }
+
+  /* Subtle radial grid background — ritual-green dots on black. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(25, 209, 132, 0.045) 1px, transparent 0),
+      radial-gradient(circle at 50% 0%, rgba(25, 209, 132, 0.06), transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(255, 29, 206, 0.04), transparent 50%);
+    background-size:
+      32px 32px,
+      100% 100%,
+      100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Animated scanline sweep — very subtle, moves down the page slowly. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(25, 209, 132, 0.015) 50%,
+      transparent 100%
+    );
+    background-size: 100% 8px;
+    animation: scanline-sweep 8s linear infinite;
+    opacity: 0.5;
+  }
+
+  /* All mono / hex / data uses the JetBrains Mono stack. */
+  .font-mono,
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+  }
+
+  ::selection {
+    background: rgba(25, 209, 132, 0.25);
+    color: #D1D5DB;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+ * Custom scrollbar — thin, ritual-green thumb on dark track.
+ * ───────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(25, 209, 132, 0.4) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(25, 209, 132, 0.35);
+    border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(25, 209, 132, 0.6);
+  }
+
+  /* ──────────────── Terminal card / input primitives ──────────────── */
+  .terminal-card {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(10, 15, 25, 0.95) 100%);
+    border: 1px solid var(--color-gray-800);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
+      0 1px 2px 0 rgba(0, 0, 0, 0.4),
+      0 8px 24px -12px rgba(0, 0, 0, 0.8),
+      0 16px 48px -24px rgba(25, 209, 132, 0.05);
+    position: relative;
+  }
+
+  /* Elevated card variant — stronger shadow for primary content cards */
+  .terminal-card-elevated {
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.98) 0%, rgba(10, 15, 25, 0.98) 100%);
+    border: 1px solid rgba(55, 65, 81, 0.6);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+      0 2px 4px 0 rgba(0, 0, 0, 0.5),
+      0 12px 32px -12px rgba(0, 0, 0, 0.9),
+      0 24px 64px -32px rgba(25, 209, 132, 0.08);
+    position: relative;
+  }
+
+  /* Glow card — for highlighted/active cards */
+  .terminal-card-glow {
+    background: linear-gradient(180deg, rgba(25, 209, 132, 0.04) 0%, rgba(10, 15, 25, 0.95) 100%);
+    border: 1px solid rgba(25, 209, 132, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+      0 0 0 1px rgba(25, 209, 132, 0.1),
+      0 12px 32px -12px rgba(0, 0, 0, 0.9),
+      0 0 32px -8px rgba(25, 209, 132, 0.15);
+    position: relative;
+  }
+
+  .terminal-input {
+    background: var(--color-surface);
+    border: 1px solid var(--color-gray-700);
+    border-radius: var(--radius-md);
+    color: #D1D5DB;
+    font-family: var(--font-mono);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .terminal-input:focus,
+  .terminal-input:focus-visible {
+    outline: none;
+    border-color: var(--color-ritual-green);
+    box-shadow: 0 0 0 1px rgba(25, 209, 132, 0.35), 0 0 16px -4px rgba(25, 209, 132, 0.4);
+  }
+  .terminal-input::placeholder {
+    color: #6B7280;
+  }
+
+  /* ──────────────── Glow utilities ──────────────── */
+  .glow-green {
+    box-shadow: 0 0 0 1px rgba(25, 209, 132, 0.4), 0 0 18px -2px rgba(25, 209, 132, 0.45);
+  }
+  .glow-pink {
+    box-shadow: 0 0 0 1px rgba(255, 29, 206, 0.4), 0 0 18px -2px rgba(255, 29, 206, 0.4);
+  }
+  .glow-gold {
+    box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.4), 0 0 18px -2px rgba(250, 204, 21, 0.4);
+  }
+  .text-glow-green {
+    text-shadow: 0 0 8px rgba(25, 209, 132, 0.55);
+  }
+  .text-glow-pink {
+    text-shadow: 0 0 8px rgba(255, 29, 206, 0.55);
+  }
+
+  /* ──────────────── Precompile badges ──────────────── */
+  .precompile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+    text-transform: uppercase;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .precompile-badge-llm {
+    color: var(--color-ritual-green);
+    border-color: rgba(25, 209, 132, 0.4);
+    background: rgba(25, 209, 132, 0.08);
+  }
+  .precompile-badge-image {
+    color: var(--color-ritual-pink);
+    border-color: rgba(255, 29, 206, 0.4);
+    background: rgba(255, 29, 206, 0.08);
+  }
+
+  /* ──────────────── Lifecycle rail dots ──────────────── */
+  .lifecycle-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid var(--color-gray-700);
+    background: #000;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-gray-500);
+    flex-shrink: 0;
+  }
+  .lifecycle-dot.active {
+    border-color: var(--color-ritual-green);
+    color: var(--color-ritual-green);
+    background: rgba(25, 209, 132, 0.12);
+    animation: pulse-green 1.6s ease-in-out infinite;
+  }
+  .lifecycle-dot.done {
+    border-color: var(--color-ritual-green);
+    color: var(--color-ritual-green);
+    background: rgba(25, 209, 132, 0.18);
+  }
+  .lifecycle-dot.failed {
+    border-color: var(--color-ritual-red);
+    color: var(--color-ritual-red);
+    background: rgba(239, 68, 68, 0.12);
+  }
+  .lifecycle-dot.warn {
+    border-color: var(--color-ritual-gold);
+    color: var(--color-ritual-gold);
+    background: rgba(250, 204, 21, 0.1);
+    animation: pulse-gold 1.4s ease-in-out infinite;
+  }
+
+  /* ──────────────── Scanline overlay ──────────────── */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(25, 209, 132, 0.5), transparent);
+    animation: scan 2.4s linear infinite;
+    pointer-events: none;
+  }
+
+  /* ──────────────── Blinking cursor ──────────────── */
+  .blink-cursor::after {
+    content: "▋";
+    color: var(--color-ritual-pink);
+    margin-left: 2px;
+    animation: blink 1s steps(2) infinite;
+  }
+
+  /* ──────────────── Misc ──────────────── */
+  .text-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  .fade-in {
+    animation: fade-in 220ms ease-out both;
+  }
+
+  /* Re-style of shadcn button variants to match terminal aesthetic. */
+  .btn-ghost-ritual {
+    background: transparent;
+    border: 1px solid var(--color-gray-700);
+    color: var(--color-gray-300);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 120ms ease;
+  }
+  .btn-ghost-ritual:hover {
+    border-color: var(--color-ritual-green);
+    color: var(--color-ritual-green);
+    background: rgba(25, 209, 132, 0.05);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+ * Keyframes
+ * ───────────────────────────────────────────────────────────────────── */
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(25, 209, 132, 0.55), 0 0 12px -2px rgba(25, 209, 132, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(25, 209, 132, 0), 0 0 18px 0 rgba(25, 209, 132, 0.7);
+  }
+}
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.5), 0 0 12px -2px rgba(250, 204, 21, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(250, 204, 21, 0), 0 0 18px 0 rgba(250, 204, 21, 0.7);
+  }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scanline-sweep {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Shimmer effect for loading states */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(25, 209, 132, 0) 0%,
+    rgba(25, 209, 132, 0.15) 50%,
+    rgba(25, 209, 132, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Float animation for icons */
+.float-up {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+/* Glass panel — for overlays and modals */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(55, 65, 81, 0.6);
+}
+
+/* Gradient text — for emphasis */
+.gradient-text-green {
+  background: linear-gradient(135deg, #19D184 0%, #BFFF00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Subtle inner glow for active cards */
+.active-card-glow {
+  box-shadow:
+    0 0 0 1px rgba(25, 209, 132, 0.3),
+    0 0 24px -8px rgba(25, 209, 132, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Dotted divider */
+.dotted-divider {
+  background-image: linear-gradient(to right, rgba(107, 114, 128, 0.4) 33%, transparent 0%);
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+  width: 100%;
+}

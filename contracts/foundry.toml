@@ -1,0 +1,32 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+script = "script"
+solc_version = "0.8.20"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+via_ir = true
+fs_permissions = [{ access = "read-write", path = "./"}]
+
+[profile.default.fuzz]
+runs = 64
+
+[profile.default.invariant]
+runs = 16
+
+[fuzz]
+max_test_rejects = 100000
+
+[fmt]
+line_length = 100
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+
+# Fork profile for testing against the live Ritual Chain RPC.
+[profile.ritual]
+eth_rpc_url = "https://rpc.ritualfoundation.org"
+chain_id = 1979
