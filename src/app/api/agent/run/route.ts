@@ -28,6 +28,8 @@ export const maxDuration = 60;
 const SOVEREIGN_AGENT_CONSUMER = (process.env.NEXT_PUBLIC_SOVEREIGN_AGENT_CONSUMER_ADDRESS ?? "0x17B557e2c6e503cd56D5F33FF25557fE77BF0298") as Address;
 const TEE_REGISTRY = "0x9644e8562cE0Fe12b4deeC4163c064A8862Bf47F" as Address;
 const ASYNC_JOB_TRACKER = "0xC069FFCa0389f44eCA2C626e55491b0ab045AEF5" as Address;
+const AGENT_API_ENABLED = process.env.PURRCHA_AGENT_API_ENABLED === "true";
+const AGENT_API_TOKEN = process.env.PURRCHA_AGENT_API_TOKEN ?? "";
 
 const TEE_REGISTRY_ABI = [
   {
@@ -91,17 +93,36 @@ const SOVEREIGN_REQUEST_TYPES = [
 ] as const;
 
 function getPrivateKey(): Hex {
+  const envKey = process.env.PURRCHA_AGENT_PRIVATE_KEY;
+  if (envKey && /^0x[0-9a-fA-F]{64}$/.test(envKey)) {
+    return envKey as Hex;
+  }
+
   try {
     const raw = readFileSync(join(process.cwd(), "upload", "private.txt"), "utf-8");
     const match = raw.match(/0x[0-9a-fA-F]{64}/);
-    if (!match) throw new Error("No private key found in upload/private.txt");
+    if (!match) throw new Error("No valid private key found");
     return match[0] as Hex;
   } catch (e) {
-    throw new Error(`Failed to read private key: ${e instanceof Error ? e.message : String(e)}`);
+    throw new Error(`Agent signer is not configured: ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
 export async function POST(req: NextRequest) {
+  if (!AGENT_API_ENABLED || !AGENT_API_TOKEN) {
+    return NextResponse.json(
+      { success: false, error: "Agent submission API is disabled" },
+      { status: 503 },
+    );
+  }
+
+  if (req.headers.get("authorization") !== `Bearer ${AGENT_API_TOKEN}`) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 },
+    );
+  }
+
   try {
     const body = await req.json();
     const prompt = body.prompt as string;
@@ -146,7 +167,7 @@ export async function POST(req: NextRequest) {
       address: TEE_REGISTRY,
       abi: TEE_REGISTRY_ABI,
       functionName: "getServicesByCapability",
-      args: [0n, true],
+      args: [0, true],
     }) as unknown as Array<{ node: { teeAddress: Address; publicKey: Hex }; isValid: boolean }>;
 
     if (!services || services.length === 0) {

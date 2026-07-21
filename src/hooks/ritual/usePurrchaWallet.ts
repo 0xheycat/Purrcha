@@ -8,7 +8,7 @@ import {
   useSendTransaction,
   usePublicClient,
 } from "wagmi";
-import { encodeFunctionData, parseEther, type Address, type Hex } from "viem";
+import { encodeFunctionData, formatUnits, parseEther, type Address, type Hex } from "viem";
 import { RITUAL_CHAIN } from "@/lib/ritual/constants";
 import { WALLET_ADDRESS, RITUAL_WALLET_ABI } from "@/lib/ritual/abi";
 
@@ -147,7 +147,9 @@ export function usePurrchaWallet(): PurrchaWalletState {
     isWrongChain,
     isDisconnected,
     nativeBalance: nativeBalanceQuery.data?.value,
-    nativeBalanceFormatted: nativeBalanceQuery.data?.formatted,
+    nativeBalanceFormatted: nativeBalanceQuery.data
+      ? formatUnits(nativeBalanceQuery.data.value, nativeBalanceQuery.data.decimals)
+      : undefined,
     ritualBalance: ritualState.balance,
     ritualBalanceFormatted: ritualState.balance
       ? formatRitual(ritualState.balance)

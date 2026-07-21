@@ -3,10 +3,11 @@
  * (forge inspect PurrchaChat abi --json) into PurrchaChat.abi.json.
  */
 import abiJson from "./PurrchaChat.abi.json";
+import type { Abi } from "viem";
 import { PURRCHA_CHAT_ADDRESS } from "./constants";
 import { RITUAL_CHAIN, ASYNC_JOB_TRACKER_ADDRESS, WALLET_ADDRESS, TEE_SERVICE_REGISTRY_ADDRESS } from "./constants";
 
-export const PURRCHA_CHAT_ABI = abiJson as const;
+export const PURRCHA_CHAT_ABI = abiJson as Abi;
 
 /** True if the contract address is configured (non-empty). */
 export const isContractDeployed = PURRCHA_CHAT_ADDRESS.length > 0;

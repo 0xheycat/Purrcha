@@ -212,12 +212,12 @@ export interface ImageCallParams {
 export function encodeImageInputs(inputs: ImageCallParams["inputs"]): Hex {
   return encodeAbiParameters(
     [{ type: "tuple[]", components: MODAL_INPUT_ABI.components }],
-    [inputs as unknown as Record<string, unknown>[]],
+    [inputs],
   );
 }
 
 export function encodeImageOutputConfig(cfg: ImageCallParams["outputConfig"]): Hex {
-  return encodeAbiParameters([OUTPUT_CONFIG_ABI], [cfg as unknown as Record<string, unknown>]);
+  return encodeAbiParameters([OUTPUT_CONFIG_ABI], [cfg]);
 }
 
 export function encodeImageStorageRef(ref: ImageCallParams["outputStorageRef"]): Hex {

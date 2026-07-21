@@ -27,7 +27,7 @@ import { useNavigationStore } from "@/stores/navigationStore";
 import { useAsyncJobEvents } from "@/hooks/ritual/useAsyncJobEvents";
 import { useAutoSwitchNetwork } from "@/hooks/ritual/useAutoSwitchNetwork";
 import { isContractDeployed, PURRCHA_CHAT_ADDRESS } from "@/lib/ritual/abi";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_CHAIN, RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
 import { HowItWorks } from "@/components/ritual/HowItWorks";
 import { PrivacyScoreDashboard } from "@/components/ritual/PrivacyScoreDashboard";
 import { NetworkStatusWidget } from "@/components/ritual/NetworkStatusWidget";
@@ -330,7 +330,7 @@ function Footer({ onOpenShortcuts }: { onOpenShortcuts: () => void }) {
           <span className="text-ritual-green">ritual chain 1979</span>
         </div>
         <div className="flex items-center gap-3">
-          <a href={RITUAL_CHAIN.blockExplorers.default.url} target="_blank" rel="noreferrer" className="hover:text-ritual-green transition-colors">↗ explorer</a>
+          <a href={RITUAL_EXPLORER_URL} target="_blank" rel="noreferrer" className="hover:text-ritual-green transition-colors">↗ explorer</a>
           <a href="https://docs.ritual.net" target="_blank" rel="noreferrer" className="hover:text-ritual-green transition-colors">↗ ritual docs</a>
           <button type="button" onClick={onOpenShortcuts} className="hover:text-ritual-green transition-colors inline-flex items-center gap-1">
             <kbd className="px-1 py-0.5 rounded border border-gray-700 text-[9px] text-gray-500">?</kbd>shortcuts

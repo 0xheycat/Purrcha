@@ -1,8 +1,20 @@
 # Purrcha
 
+[![Verified](https://img.shields.io/badge/verified-self--hosted-15f5ba)](VERIFICATION.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Ritual Chain](https://img.shields.io/badge/Ritual%20Chain-1979-15f5ba)](https://explorer.ritualfoundation.org)
+[![Public project page](https://img.shields.io/badge/project-0xheycat.xyz-f5b45a)](https://0xheycat.xyz/work/purrcha)
+
 **Private Multi-modal ChatGPT On-Chain** — a flagship dApp on [Ritual Chain](https://ritual.foundation) (Chain ID 1979).
 
-Purrcha is a premium dark-mode AI terminal command center: private, verifiable, on-chain, TEE-powered, and visually memorable. Connect a wallet, send text prompts, upload images, receive AI responses through Ritual precompiles, encrypt private conversation history, persist/index on-chain events, and verify every response through on-chain proof / TEE attestation.
+Purrcha is a premium dark-mode AI terminal command center: private, verifiable, on-chain, and TEE-powered. Connect a wallet, send text prompts, upload images, receive AI responses through Ritual precompiles, encrypt private conversation history, persist/index on-chain events, and inspect the transaction evidence behind each response.
+
+## Public verification
+
+- **PurrchaChat contract:** [`0x6bcd7da645ada988a1f2d46ef265446201d9ab00`](https://explorer.ritualfoundation.org/address/0x6bcd7da645ada988a1f2d46ef265446201d9ab00)
+- **Deployment transaction:** [`0xf675e074…393da06`](https://explorer.ritualfoundation.org/tx/0xf675e074393b8486dbab96c4b3db30b5564e5ccb79e8381ff83fba6ef393da06)
+- **Project overview:** [0xheycat.xyz/work/purrcha](https://0xheycat.xyz/work/purrcha)
+- **Current limitation:** Ritual executor availability can affect live inference even when the contract and application build are healthy.
 
 ---
 
@@ -321,7 +333,7 @@ bun run build                            # Next.js production build
 
 ## License
 
-MIT
+[MIT](LICENSE) © 0xheycat
 
 ---
 

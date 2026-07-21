@@ -16,7 +16,7 @@ import { usePublicClient } from "wagmi";
 import { decodeAbiParameters, type Hex } from "viem";
 import { SOVEREIGN_AGENT_CONSUMER_ADDRESS } from "@/lib/ritual/constants";
 import { Terminal, RefreshCw, ExternalLink, CheckCircle2, XCircle, Loader2, Cpu } from "lucide-react";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
 
 interface AgentLog {
   jobId: string;
@@ -175,7 +175,7 @@ export function AgentLogsPanel() {
             {SOVEREIGN_AGENT_CONSUMER_ADDRESS}
           </span>
           <a
-            href={`${RITUAL_CHAIN.blockExplorers.default.url}/address/${SOVEREIGN_AGENT_CONSUMER_ADDRESS}`}
+            href={`${RITUAL_EXPLORER_URL}/address/${SOVEREIGN_AGENT_CONSUMER_ADDRESS}`}
             target="_blank"
             rel="noreferrer"
             className="text-gray-600 hover:text-ritual-green transition-colors flex-shrink-0"

@@ -2,14 +2,18 @@
  * Event signature topics for the PurrchaChat contract. Used by the backend indexer
  * to filter logs by topic0. Computed with keccak256 of the event signature.
  */
-import { keccak256 } from "viem";
+import { keccak256, stringToHex } from "viem";
+
+function eventTopic(signature: string): `0x${string}` {
+  return keccak256(stringToHex(signature));
+}
 
 export const EVENT_TOPICS = {
-  ChatSubmitted: keccak256("ChatSubmitted(address,bytes32,address,string,uint256,uint256)"),
-  ChatResultSettled: keccak256("ChatResultSettled(address,bytes32,bool,bytes,string,bytes,bytes,bytes32)"),
-  ImageJobSubmitted: keccak256("ImageJobSubmitted(address,bytes32,address,string,bytes32,uint256)"),
-  ImageResultDelivered: keccak256("ImageResultDelivered(address,bytes32,bool,string,bytes32,uint256,uint256,string,bytes,bytes)"),
-  VerificationMetadata: keccak256("VerificationMetadata(address,bytes32,uint8,address,bytes32,uint256,bool)"),
+  ChatSubmitted: eventTopic("ChatSubmitted(address,bytes32,address,string,uint256,uint256)"),
+  ChatResultSettled: eventTopic("ChatResultSettled(address,bytes32,bool,bytes,string,bytes,bytes,bytes32)"),
+  ImageJobSubmitted: eventTopic("ImageJobSubmitted(address,bytes32,address,string,bytes32,uint256)"),
+  ImageResultDelivered: eventTopic("ImageResultDelivered(address,bytes32,bool,string,bytes32,uint256,uint256,string,bytes,bytes)"),
+  VerificationMetadata: eventTopic("VerificationMetadata(address,bytes32,uint8,address,bytes32,uint256,bool)"),
 } as const;
 
 /** Decode the user (topic1) and requestId (topic2) from an indexed event log. */

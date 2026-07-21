@@ -24,26 +24,25 @@ const archivoBlack = Archivo_Black({
   display: "swap",
 });
 
+const publicUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://0xheycat.xyz/work/purrcha";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(publicUrl),
+  alternates: { canonical: publicUrl },
   title: "Purrcha — Private Multi-modal ChatGPT On-Chain | Ritual Chain",
   description:
     "Purrcha is a private multi-modal ChatGPT running on Ritual Chain (1979). TEE-secured LLM + Image precompiles, ECIES-encrypted conversation history, on-chain verifiable receipts.",
-  keywords: [
-    "Purrcha",
-    "Ritual Chain",
-    "TEE",
-    "on-chain AI",
-    "private chat",
-    "ECIES",
-    "LLM",
-    "image generation",
-    "dApp",
-  ],
-  authors: [{ name: "Purrcha" }],
+  applicationName: "Purrcha",
+  authors: [{ name: "0xheycat", url: "https://github.com/0xheycat" }],
+  creator: "0xheycat",
+  publisher: "0xheycat",
+  robots: { index: true, follow: true },
   openGraph: {
     title: "Purrcha — Private Multi-modal ChatGPT On-Chain",
     description: "TEE-secured LLM + Image precompiles on Ritual Chain 1979.",
     type: "website",
+    url: publicUrl,
+    siteName: "Purrcha",
   },
   twitter: {
     card: "summary_large_image",
