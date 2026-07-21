@@ -1,0 +1,404 @@
+# Instincts generated from https://github.com/0xheycat/Purrcha
+# Generated: 2026-07-21T09:33:16.335Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: Purrcha-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: fix
+
+## Evidence
+
+- 2 commits analyzed
+- Detected conventional commit pattern
+- Examples: fix: make Purrcha public repository verification honest
+
+---
+id: Purrcha-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Commit Length
+
+## Action
+
+Write moderate-length commit messages (~55 characters)
+
+## Evidence
+
+- Average commit message length: 55 chars
+- Based on 2 commits
+
+---
+id: Purrcha-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: Purrcha-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: Purrcha-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: Purrcha-arch-type-based
+trigger: "when adding new code"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Arch Type Based
+
+## Action
+
+Place code in the appropriate type folder (components/, services/, utils/, etc.)
+
+## Evidence
+
+- Type-based module organization detected
+- Folders: app, components, hooks, lib, types
+
+---
+id: Purrcha-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: Purrcha-workflow-api-endpoint-update
+trigger: "when doing api endpoint update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/0xheycat/Purrcha
+---
+
+# Purrcha Workflow Api Endpoint Update
+
+## Action
+
+Follow the api-endpoint-update workflow:
+1. Edit the relevant API route file in src/app/api/...
+2. Update related hooks or libraries if necessary
+3. Modify or add related components that consume the API
+4. Update documentation or configuration as needed
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/app/api/agent/run/route.ts
+
+---
+id: purrcha-instinct-file-naming
+trigger: "When creating a new file in the codebase"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct File Naming
+
+## Action
+
+Name the file using PascalCase (e.g., MyComponent.tsx)
+
+## Evidence
+
+- Pattern in namingConventions.files
+- Folder structure in src/components, src/hooks, etc.
+
+---
+id: purrcha-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Function Naming
+
+## Action
+
+Name the function using camelCase (e.g., fetchData)
+
+## Evidence
+
+- Pattern in namingConventions.functions
+
+---
+id: purrcha-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Class Naming
+
+## Action
+
+Name the class using PascalCase (e.g., UserService)
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: purrcha-instinct-constant-naming
+trigger: "When declaring a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Constant Naming
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE (e.g., MAX_RETRIES)
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: purrcha-instinct-import-alias
+trigger: "When importing modules"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Import Alias
+
+## Action
+
+Use import aliases instead of relative paths when possible
+
+## Evidence
+
+- Pattern in importStyle: alias
+
+---
+id: purrcha-instinct-named-exports
+trigger: "When exporting functions, classes, or constants"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Named Exports
+
+## Action
+
+Use named exports instead of default exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: purrcha-instinct-try-catch-errors
+trigger: "When handling errors in code"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Try Catch Errors
+
+## Action
+
+Use try-catch blocks for error handling
+
+## Evidence
+
+- Pattern in errorHandling.style: try-catch
+
+---
+id: purrcha-instinct-git-commit-format
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Git Commit Format
+
+## Action
+
+Use the conventional commit format with a prefix (e.g., fix: ...)
+
+## Evidence
+
+- Pattern in commits.type: conventional
+- Prefix 'fix' in commit examples
+
+---
+id: purrcha-instinct-git-commit-length
+trigger: "When writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Git Commit Length
+
+## Action
+
+Keep the commit message concise, around 55 characters on average
+
+## Evidence
+
+- Pattern in commits.averageLength: 55
+
+---
+id: purrcha-instinct-api-endpoint-update
+trigger: "When someone needs to fix or modify the logic of an existing API endpoint"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Api Endpoint Update
+
+## Action
+
+Edit the relevant API route file in src/app/api/..., update related hooks or libraries if necessary, modify or add related components that consume the API, and update documentation or configuration as needed
+
+## Evidence
+
+- Workflow: api-endpoint-update
+- Commit sequence and files involved
+
+---
+id: purrcha-instinct-test-location
+trigger: "When adding or updating tests"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Test Location
+
+## Action
+
+Place test files in a separate test location, not mixed with source files
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation: separate
+
+---
+id: purrcha-instinct-type-based-organization
+trigger: "When organizing modules or files in src"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: 0xheycat/Purrcha
+---
+
+# Purrcha Instinct Type Based Organization
+
+## Action
+
+Organize by type (e.g., components, hooks, lib, types), not by feature
+
+## Evidence
+
+- Pattern in architecture.moduleOrganization: type-based
+- srcLayout folders
+
