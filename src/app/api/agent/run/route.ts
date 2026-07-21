@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
       address: TEE_REGISTRY,
       abi: TEE_REGISTRY_ABI,
       functionName: "getServicesByCapability",
-      args: [0n, true],
+      args: [0, true],
     }) as unknown as Array<{ node: { teeAddress: Address; publicKey: Hex }; isValid: boolean }>;
 
     if (!services || services.length === 0) {

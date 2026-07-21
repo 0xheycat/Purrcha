@@ -12,7 +12,7 @@
 
 import { useEffect, useState } from "react";
 import { Trophy, Zap, MessageSquare, Shield, Loader2, ExternalLink } from "lucide-react";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
 
 interface LeaderboardEntry {
   address: string;
@@ -160,7 +160,7 @@ export function GenesisLeaderboard() {
 
                   {/* Address */}
                   <a
-                    href={`${RITUAL_CHAIN.blockExplorers.default.url}/address/${entry.address}`}
+                    href={`${RITUAL_EXPLORER_URL}/address/${entry.address}`}
                     target="_blank"
                     rel="noreferrer"
                     className="font-mono text-[10px] text-gray-400 hover:text-ritual-green truncate flex-1"

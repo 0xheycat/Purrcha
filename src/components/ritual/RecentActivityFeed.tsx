@@ -13,7 +13,7 @@
 
 import { useEffect, useState } from "react";
 import { Activity, ArrowUpRight, ExternalLink, Loader2 } from "lucide-react";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
 
 interface ActivityItem {
   type: "ChatSubmitted" | "ChatResultSettled" | "ImageJobSubmitted" | "ImageResultDelivered" | "VerificationMetadata";
@@ -147,7 +147,7 @@ export function RecentActivityFeed() {
                       </span>
                     )}
                     <a
-                      href={`${RITUAL_CHAIN.blockExplorers.default.url}/tx/${item.txHash}`}
+                      href={`${RITUAL_EXPLORER_URL}/tx/${item.txHash}`}
                       target="_blank"
                       rel="noreferrer"
                       className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-500 hover:text-ritual-green"

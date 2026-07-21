@@ -9,7 +9,7 @@ import {
   type AsyncTxStatus,
 } from "@/types/asyncTx";
 import { truncateHex, useCopyToClipboard } from "@/hooks/ritual/useChainStatus";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
 
 /**
  * LifecycleRail — right panel. The 9-state execution console.
@@ -144,7 +144,7 @@ function TxLifecycleCard({
   };
 
   const explorerUrl = tx.state.txHash
-    ? `${RITUAL_CHAIN.blockExplorers.default.url}/tx/${tx.state.txHash}`
+    ? `${RITUAL_EXPLORER_URL}/tx/${tx.state.txHash}`
     : null;
 
   return (

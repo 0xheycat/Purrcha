@@ -6,6 +6,8 @@
 
 import { defineChain } from "viem";
 
+export const RITUAL_EXPLORER_URL = "https://explorer.ritualfoundation.org";
+
 export const RITUAL_CHAIN = defineChain({
   id: 1979,
   name: "Ritual Chain",
@@ -17,7 +19,7 @@ export const RITUAL_CHAIN = defineChain({
     },
   },
   blockExplorers: {
-    default: { name: "Ritual Explorer", url: "https://explorer.ritualfoundation.org" },
+    default: { name: "Ritual Explorer", url: RITUAL_EXPLORER_URL },
   },
   testnet: true,
   // Ritual Chain does NOT support standard EIP-1559 (type 2) transactions.
@@ -26,8 +28,6 @@ export const RITUAL_CHAIN = defineChain({
   fees: {
     estimateFeesPerGas: async () => ({
       gasPrice: 1_000_000_000n, // 1 gwei — legacy mode
-      maxFeePerGas: undefined as unknown as bigint,
-      maxPriorityFeePerGas: undefined as unknown as bigint,
     }),
   },
 });

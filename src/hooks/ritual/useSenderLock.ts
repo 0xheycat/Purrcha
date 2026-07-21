@@ -32,7 +32,6 @@ export function useSenderLock(address?: Address): UseSenderLockResult {
     query: {
       enabled,
       refetchInterval: 5_000,
-      refetchOnBlock: true,
     },
   });
 

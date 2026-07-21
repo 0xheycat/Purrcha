@@ -16,7 +16,8 @@
 import { useEffect, useState } from "react";
 import { FileCode, Box, Eye, Cpu, Loader2, RefreshCw, ExternalLink, CheckCircle2, XCircle } from "lucide-react";
 import { PURRCHA_CHAT_ADDRESS, PURRCHA_CHAT_ABI } from "@/lib/ritual/abi";
-import { RITUAL_CHAIN } from "@/lib/ritual/constants";
+import { RITUAL_EXPLORER_URL } from "@/lib/ritual/constants";
+import type { AbiEvent, AbiFunction } from "viem";
 
 interface ContractInfo {
   address: string;
@@ -52,8 +53,8 @@ export function ContractInspector() {
       const hasCode = health.contractDeployed;
 
       // Count functions + events from ABI
-      const functions = PURRCHA_CHAT_ABI.filter((item: { type: string }) => item.type === "function");
-      const events = PURRCHA_CHAT_ABI.filter((item: { type: string }) => item.type === "event");
+      const functions = PURRCHA_CHAT_ABI.filter((item): item is AbiFunction => item.type === "function");
+      const events = PURRCHA_CHAT_ABI.filter((item): item is AbiEvent => item.type === "event");
 
       setInfo({
         address: PURRCHA_CHAT_ADDRESS,
@@ -130,7 +131,7 @@ export function ContractInspector() {
               </div>
             </div>
             <a
-              href={`${RITUAL_CHAIN.blockExplorers.default.url}/address/${info.address}`}
+              href={`${RITUAL_EXPLORER_URL}/address/${info.address}`}
               target="_blank"
               rel="noreferrer"
               className="text-gray-500 hover:text-ritual-green transition-colors flex-shrink-0"
@@ -200,7 +201,7 @@ export function ContractInspector() {
               </span>
             </summary>
             <div className="px-4 py-2 space-y-1 max-h-40 overflow-y-auto scrollbar-thin">
-              {PURRCHA_CHAT_ABI.filter((item: { type: string }) => item.type === "function").map((fn: { name?: string; stateMutability?: string }, i: number) => (
+              {PURRCHA_CHAT_ABI.filter((item): item is AbiFunction => item.type === "function").map((fn, i) => (
                 <div key={i} className="font-mono text-[10px] text-gray-400 flex items-center gap-2">
                   <span className="text-ritual-green/70">fn</span>
                   <span className="text-gray-300">{fn.name || "unknown"}()</span>
@@ -220,7 +221,7 @@ export function ContractInspector() {
               </span>
             </summary>
             <div className="px-4 py-2 space-y-1 max-h-40 overflow-y-auto scrollbar-thin">
-              {PURRCHA_CHAT_ABI.filter((item: { type: string }) => item.type === "event").map((ev: { name?: string }, i: number) => (
+              {PURRCHA_CHAT_ABI.filter((item): item is AbiEvent => item.type === "event").map((ev, i) => (
                 <div key={i} className="font-mono text-[10px] text-gray-400 flex items-center gap-2">
                   <span className="text-ritual-pink/70">ev</span>
                   <span className="text-gray-300">{ev.name || "unknown"}()</span>

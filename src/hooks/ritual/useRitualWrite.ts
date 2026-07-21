@@ -60,10 +60,10 @@ export function useRitualWrite(): RitualWriteResult {
         data = args.data;
       } else if (args.abi && args.functionName) {
         data = encodeFunctionData({
-          abi: args.abi as never,
+          abi: args.abi,
           functionName: args.functionName,
-          args: (args.args ?? []) as never,
-        });
+          args: args.args ?? [],
+        } as never);
       } else {
         throw new Error("useRitualWrite: either `data` or `abi+functionName+args` is required.");
       }
@@ -84,12 +84,14 @@ export function useRitualWrite(): RitualWriteResult {
       };
       if (valueHex) txParams.value = valueHex;
 
+      const provider = typeof window !== "undefined" ? window.ethereum : undefined;
+
       // Get the connected account address
       if (connectorClient?.account?.address) {
         txParams.from = connectorClient.account.address;
-      } else if (typeof window !== "undefined" && window.ethereum) {
-        const accounts = await window.ethereum.request({ method: "eth_accounts" });
-        if (accounts && accounts.length > 0) txParams.from = accounts[0];
+      } else if (provider) {
+        const accounts = (await provider.request({ method: "eth_accounts" })) as string[];
+        if (accounts.length > 0) txParams.from = accounts[0];
       }
 
       if (!txParams.from) {
@@ -97,8 +99,11 @@ export function useRitualWrite(): RitualWriteResult {
       }
 
       try {
+        if (!provider) {
+          throw new Error("Wallet provider is unavailable.");
+        }
         // Direct eth_sendTransaction — bypasses viem's tx type detection entirely.
-        const hash = await window.ethereum.request({
+        const hash = await provider.request({
           method: "eth_sendTransaction",
           params: [txParams],
         });
