@@ -1,6 +1,6 @@
 # Purrcha
 
-[![CI](https://github.com/0xheycat/Purrcha/actions/workflows/ci.yml/badge.svg)](https://github.com/0xheycat/Purrcha/actions/workflows/ci.yml)
+[![Verified](https://img.shields.io/badge/verified-self--hosted-15f5ba)](VERIFICATION.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Ritual Chain](https://img.shields.io/badge/Ritual%20Chain-1979-15f5ba)](https://explorer.ritualfoundation.org)
 [![Public project page](https://img.shields.io/badge/project-0xheycat.xyz-f5b45a)](https://0xheycat.xyz/work/purrcha)
